@@ -48,13 +48,10 @@
 				method 			: 'GET',
 				dataType 		: 'jsonp',
 				url 			: fileUrl,
-				data,
+				data: data,
 				error 			: ajaxHandler.error,
-				success 		: ajaxHandler.success
-			})
-			.always((raw) =>{
-				//cons(console.log(`always => ${raw.split(/\n/g)}`))
-				if(undefined !== raw) {
+				success 		: (e) => {
+					if(undefined !== raw) {
 					raw.toLowerCase().split(splitRegex.rows).map((r, indexRaw) => {
 						//cons(console.log(indexRaw, r))
 						if(0 !== indexRaw) { //Removing the header row
@@ -183,6 +180,11 @@
 				}
 
 				else cons(console.error(`Houve um erro para trazer os dados do CSV`))
+				} //ajaxHandler.success
+			})
+			.always((raw) =>{
+				//cons(console.log(`always => ${raw.split(/\n/g)}`))
+				
 				
 			})
 		}())
